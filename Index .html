@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medha's Cosmic Corner</title>
+    <style>
+        /* --- SPACE THEME COLORS & ACCENTS --- */
+        :root {
+            --space-black: #0b0b14;
+            --nebula-purple: #2d1b4e;
+            --starlight: #f1f5f9;
+            --cosmic-pink: #ff2a74;
+            --galaxy-blue: #00d2ff;
+            --moon-gray: #e2e8f0;
+        }
+
+        /* --- BASIC SETUP --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--space-black);
+            color: var(--starlight);
+            font-family: 'Century Gothic', Arial, sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- STARRY BACKGROUND EFFECT --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        .navbar {
+            background-color: rgba(11, 11, 20, 0.85);
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid var(--nebula-purple);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--galaxy-blue);
+            text-shadow: 0 0 10px var(--galaxy-blue);
+        }
+
+        .nav-links a {
+            color: var(--starlight);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cosmic-pink);
+            text-shadow: 0 0 8px var(--cosmic-pink);
+        }
+
+        /* --- SECTION MAIN CONTAINER --- */
+        section {
+            padding: 120px 20px 60px 20px;
+            min-height: 100vh;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-heading {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--galaxy-blue);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+        }
+
+        /* --- SECTION 1: ABOUT ME --- */
+        .intro-box {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            background: rgba(45, 27, 78, 0.3);
+            border: 2px solid var(--nebula-purple);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .intro-text h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: var(--cosmic-pink);
+        }
+
+        .intro-text h3 {
+            font-size: 18px;
+            color: var(--galaxy-blue);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .intro-text p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--moon-gray);
+        }
+
+        .hobby-tags {
+            margin-top: 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--nebula-purple);
+            border: 1px solid var(--galaxy-blue);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .visual-side {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .space-avatar {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 4px solid var(--galaxy-blue);
+            box-shadow: 0 0 20px var(--galaxy-blue);
+            object-fit: cover;
+        }
+
+        /* --- SECTION 2: COSMIC NATURE BLOGS --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: rgba(20, 20, 35, 0.8);
+            border: 1px solid var(--nebula-purple);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cosmic-pink);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-title {
+            font-size: 20px;
+            color: var(--galaxy-blue);
+            margin-bottom: 10px;
+        }
+
+        .blog-text {
+            font-size: 14px;
+            color: var(--moon-gray);
+        }
+
+        /* --- SECTION 3: ANTI-GRAVITY ZONE & MINI GAME --- */
+        .game-area {
+            background: rgba(15, 15, 30, 0.7);
+            border: 3px dashed var(--cosmic-pink);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .game-title {
+            font-size: 24px;
+            color: yellow;
+            margin-bottom: 10px;
+        }
+
+        .game-instructions {
+            font-size: 14px;
+            color: var(--moon-gray);
+            margin-bottom: 25px;
+        }
+
+        /* Interactive Canvas Sandbox Container */
+        .space-container {
+            width: 100%;
+            height: 300px;
+            background: #020208;
+            border: 2px solid var(--nebula-purple);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* Floating game element mimicking zero-g flight paths */
+        .floating-asteroid {
+            width: 45px;
+            height: 45px;
+            background: radial-gradient(circle at 30% 30%, #ff8800, #aa3300);
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff5500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            user-select: none;
+            transition: left 0.1s linear, top 0.1s linear;
+        }
+
+        .score-counter {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--galaxy-blue);
+            margin-top: 10px;
+        }
+
+        /* Action triggers */
+        .action-btn {
+            background: var(--cosmic-pink);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            background: #e0165c;
+        }
+
+        /* --- BEAUTIFUL COSMIC ENDING --- */
+        .cosmic-ending {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(to top, var(--nebula-purple), transparent);
+            border-top: 1px solid var(--nebula-purple);
+            margin-top: 60px;
+        }
+
+        .ending-quote {
+            font-size: 24px;
+            font-style: italic;
+            max-width: 750px;
+            margin: 0 auto 25px auto;
+            color: #cbd5e1;
+            text-shadow: 0 0 8px rgba(241, 245, 249, 0.2);
+        }
+
+        .signature {
+            font-size: 19px;
+            font-weight: bold;
+            color: var(--galaxy-blue);
+            letter-spacing: 1px;
+        }
+
+        /* --- RESPONSIVE MOBILE FIXES --- */
+        @media (max-width: 768px) {
+            .intro-box {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="logo">🌌 Medha.Space</div>
+        <div class="nav-links">
+            <a href="#orbit">My Orbit</a>
+            <a href="#logs">Captains Logs</a>
+            <a href="#gravity">Zero Gravity</a>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: ABOUT ME (MY ORBIT) -->
+    <section id="orbit">
+        <h2 class="section-heading">Entering Medha's Orbit</h2>
+        <div class="intro-box">
+            <div class="intro-text">
+                <h1>Namaste, I'm Medha Duggal 🇮🇳</h1>
+                <h3>15-Year-Old Cosmophile, Thinker & Creator</h3>
+                <p>Welcome to my tiny coordinate in the vast fabric of space-time! I am a high schooler from India who spends way too much time looking up at the night sky wondering about the mechanics of the universe.</p>
+    <!-- SECTION 2: COSMIC NATURE BLOGS -->
+    <section id="logs">
+        <h2 class="section-heading">The Captain's Logs (Travel Diaries)</h2>
+        <div class="blog-grid">
+            
+            <!-- Card 1: Mountains -->
+            <div class="blog-card">
+                <img src="https://unsplash.com" alt="High Mountains" class="blog-img">
+                <div class="blog-content">
+                    <h3 class="blog-title">🏔️ Escaping Gravity: The Mountains</h3>
+                    <p class="blog-text">There is nothing quite like high altitudes to make you realize how thin our protective atmospheric blanket really is. Standing on cold, rocky peaks feels like standing on the rugged surface of an alien planet. The air is crisp, the silence is heavy, and the stars up there look so bright you feel like you could reach out and pluck one right out of the sky.</p>
+                </div>
+            </div>
+
+            <!-- Card 2: Beaches -->
+            <div class="blog-card">
+                <img src="https://unsplash.com" alt="Night Ocean Beach" class="blog-img">
+                <div class="blog-content">
+                    <h3 class="blog-title">🌊 Cosmic Rhythms: The Ocean Beaches</h3>
+                    <p class="blog-text">Walking along the shoreline at night is a deeply cosmic experience. Looking out into the endless dark ocean is exactly like staring out into the interstellar void. As the waves crash against my feet, I love remembering that the ocean tides are driven completely by the gravitational pull of our Moon. It's a daily, beautiful reminder of celestial mechanics right here on Earth.</p>
+                </div>
+            </div>
+
+            <!-- Card 3: Galaxy Points -->
+            <div class="blog-card">
+                <img src="https://unsplash.com" alt="Milky Way Galaxy View" class="blog-img">
+                <div class="blog-content">
+                    <h3 class="blog-title">🌌 Deep Space: Star-Gazing Points</h3>
+                    <p class="blog-text">Finding a true dark-sky reserve or "Galaxy Point" away from city light pollution changes you forever. When you look up and clearly see the glowing, smoky arm of our Milky Way Galaxy spanning across the horizon, you instantly forget your tiny terrestrial problems. You realize we are not just living *on* Earth; we are passengers riding a massive rock spaceship hurtling through the deep void.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: ANTI-GRAVITY ZONE & MINI GAME -->
+    <section id="gravity">
+        <h2 class="section-heading">Entering the Zero-Gravity Silly Zone</h2>
+        <div class="game-area">
+            <h3 class="game-title">☄️ Anti-Gravity Space Sandbox</h3>
+            <p class="game-instructions">An asteroid has lost its gravity sequence! Tap/Click the floating asteroid to safely harvest cosmic dust before it speeds off. Want to mess with real physics? Click "Toggle Gravity Axis" to force regular mass properties onto the container!</p>
+            
+            <div class="space-container" id="sandbox">
+                <div class="floating-asteroid" id="asteroid" onclick="harvestAsteroid()">☄️</div>
+            </div>
+
+            <button class="action-btn" onclick="toggleGravityField()">🌀 Toggle Gravity Axis</button>
+            <button class="action-btn" onclick="resetAsteroidState()">🔄 Recalibrate Speed</button>
+            
+            <div class="score-counter">Cosmic Score: <span id="gameScore">0</span></div>
+            <p id="physicsNotice" style="margin-top: 15px; font-size: 13px; color: yellow;">Status: Engine Output Normal. Anti-Gravity Environment: Active.</p>
+        </div>
+    </section>
+
+    <!-- BEAUTIFUL COSMIC ENDING -->
+    <div class="cosmic-ending">
+        <p class="ending-quote">
+            "The cosmos is within us. We are made of star-stuff. We are a way for the universe to know itself." <br>
+            <span style="font-size: 15px; color: var(--cosmic-pink); font-weight: bold;">— Carl Sagan</span>
+        </p>
+        <p class="signature">Designed by Medha Duggal © 2026</p>
+        <p style="font-size: 13px; color: var(--galaxy-blue); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px;">Keep looking up. ☄️</p>
+    </div>
+
+    <!-- GAME LOGIC / PHYSICS ENGINE JAVASCRIPT -->
+    <script>
+        let score = 0;
+        let posX = 100;
+        let posY = 100;
+        let speedX = 3;
+        let speedY = 2;
+        let gravityEnabled = false;
+
+        const asteroid = document.getElementById('asteroid');
+        const container = document.getElementById('sandbox');
+        const scoreDisplay = document.getElementById('gameScore');
+        const statusNotice = document.getElementById('physicsNotice');
+
+        function updatePhysics() {
+            const maxX = container.clientWidth - asteroid.clientWidth;
+            const maxY = container.clientHeight - asteroid.clientHeight;
+
+            posX += speedX;
+            posY += speedY;
+
+            if (gravityEnabled) {
+                speedY += 0.2; 
+            }
+
+            if (posX >= maxX || posX <= 0) {
+                speedX = -speedX;
+                posX = Math.max(0, Math.min(posX, maxX));
+            }
+            if (posY >= maxY || posY <= 0) {
+                speedY = -speedY * (gravityEnabled ? 0.85 : 1); 
+                posY = Math.max(0, Math.min(posY, maxY));
+            }
+
+            asteroid.style.left = posX + 'px';
+            asteroid.style.top = posY + 'px';
+
+            requestAnimationFrame(updatePhysics);
+        }
+
+        function harvestAsteroid() {
+            score++;
+            scoreDisplay.innerText = score;
+
+            let structuralMultiplier = 1.15;
+            if (score > 10) structuralMultiplier = 1.30;
+
+            speedX = (speedX > 0 ? 1 : -1) * (Math.abs(speedX) + 0.6) * structuralMultiplier;
+            speedY = (speedY > 0 ? 1 : -1) * (Math.abs(speedY) + 0.4) * structuralMultiplier;
+
+            if (Math.abs(speedX) > 12) speedX = speedX > 0 ? 12 : -12;
+            if (Math.abs(speedY) > 12) speedY = speedY > 0 ? 12 : -12;
+
+            asteroid.style.background = "radial-gradient(circle at 30% 30%, #00ffff, #0055ff)";
+            setTimeout(() => {
+                asteroid.style.background = "radial-gradient(circle at 30% 30%, #ff8800, #aa3300)";
+            }, 150);
+        }
+
+        function toggleGravityField() {
+            gravityEnabled = !gravityEnabled;
+            if (gravityEnabled) {
+                statusNotice.innerText = "Status: Warning! Artificial Earth Gravity Activated inside the engine compartment.";
+                statusNotice.style.color = "var(--cosmic-pink)";
+            } else {
+                statusNotice.innerText = "Status: Engine Output Normal. Anti-Gravity Environment: Active.";
+                statusNotice.style.color = "yellow";
+            }
+        }
+
+        function resetAsteroidState() {
+            posX = 50;
+            posY = 50;
+            speedX = 3;
+            speedY = 2;
+            score = 0;
+            scoreDisplay.innerText = score;
+            gravityEnabled = false;
+            statusNotice.innerText = "Status: Engine Output Normal. Anti-Gravity Environment: Active.";
+            statusNotice.style.color = "yellow";
+        }
+
+        updatePhysics();
+    </script>
+</body>
+</html>
